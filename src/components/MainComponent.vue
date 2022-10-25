@@ -1,32 +1,31 @@
 <template>
   <div class="container">
-    <div class="home">
-      <sidebar />
-    <div class="hello">
-      <h1> Main </h1>
-    </div>
+    <sidebar />
+    <div class="wrapper">
+      <component :is="currentTab"></component>
     </div>
   </div>
 </template>
 
 <script>
 import Sidebar from './sidebar/Sidebar';
+import Home from './home/Home';
 
 export default {
   name: 'MainComponent',
-  components: { Sidebar },
+  components: { Sidebar, Home },
+  data() {
+    return {
+      currentTab: 'Home',
+    }
+  }
 }
 </script>
 
 <style scoped>
 
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
+.wrapper {
+  padding: 60px 0;
 }
-.home {
-  display: grid;
-  grid-template-columns: 2fr 10fr;
-  column-gap: 20px;
-}
+
 </style>
