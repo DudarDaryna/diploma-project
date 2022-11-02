@@ -10,13 +10,14 @@
 <script>
 import Sidebar from './sidebar/Sidebar';
 import Home from './home/Home';
+import Playlist from './playlist/Playlist.vue';
 
 export default {
   name: 'MainComponent',
-  components: { Sidebar, Home },
+  components: { Sidebar, Home, Playlist },
   data() {
     return {
-      currentTab: 'Home',
+      currentTab: 'Playlist',
     }
   }
 }

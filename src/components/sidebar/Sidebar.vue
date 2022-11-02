@@ -50,19 +50,22 @@ export default {
 .sidebar {
   position: relative;
 
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   background-color: #E8ECEF;
 
   &::before {
     content: "";
     position: absolute;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     width: calc(100vw - 720px);
     transform: translateX(-100%);
     background-color: #E8ECEF;
   }
 
   &__content {
+    position: fixed;
     display: flex;
     flex-direction: column;
     gap: 40px;

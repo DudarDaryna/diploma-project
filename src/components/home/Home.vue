@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import Cover from './components/Cover'
+import cover from '../globalComponents/cover';
 
 export default {
   name: 'Home',
-  components: { Cover },
+  components: { cover },
 }
 
 </script>
