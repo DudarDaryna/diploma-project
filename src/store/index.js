@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    currentTab: "home",
     songs: [
       {
         index: 0,
@@ -27,6 +28,9 @@ export default createStore({
     activePlayList: "all",
   },
   mutations: {
+    setTabMutation: (state, payload) => {
+      state.currentTab = payload;
+    },
     setCurrentMusic: (state, newMusic) => {
       state.activeMusic = newMusic;
     },

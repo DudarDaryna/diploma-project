@@ -8,6 +8,8 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex';
 import Sidebar from './sidebar/Sidebar';
 import Home from './home/Home';
 import Playlist from './playlist/Playlist.vue';
@@ -15,11 +17,9 @@ import Playlist from './playlist/Playlist.vue';
 export default {
   name: 'MainComponent',
   components: { Sidebar, Home, Playlist },
-  data() {
-    return {
-      currentTab: 'Playlist',
-    }
-  }
+  computed: mapState({
+    currentTab: state => state.currentTab,
+  })
 }
 </script>
 

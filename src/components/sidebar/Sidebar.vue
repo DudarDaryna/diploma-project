@@ -4,33 +4,14 @@
       <div class="logo">
         <img src="../../assets/Logo.svg" alt="RHYTHM logo">
       </div>
-      <div class="sidebar__navigation navigation">
+      <div v-for="(list, index) in navList" :key="index" class="sidebar__navigation navigation">
         <ul class="navigation__list">
-          <p class="navigation__title">Меню</p>
-          <li class="navigation__item active">
-            <router-link to="/home">
-              <i class="icon-globe"></i>
-              Головна
+          <p class="navigation__title">{{ list.title }}</p>
+          <li v-for="(item, index) in list.items" :key="index" class="navigation__item"
+            :class="currentTab == item.tab ? 'active' : ''">
+            <router-link :to="item.routePath">
+              {{ item.itemTitle }}
             </router-link>
-          </li>
-          <li class="navigation__item">
-            <router-link to="/playlists">Плейлисти</router-link>
-          </li>
-          <li class="navigation__item">
-            <router-link to="/home">Альбоми</router-link>
-          </li>
-        </ul>
-
-        <ul class="navigation__list">
-          <p class="navigation__title">Бібліотека</p>
-          <li class="navigation__item">
-            <router-link to="/home">Нещодавні</router-link>
-          </li>
-          <li class="navigation__item">
-            <router-link to="/favourites">Вибрані</router-link>
-          </li>
-          <li class="navigation__item">
-            <router-link to="/local">Локальні</router-link>
           </li>
         </ul>
       </div>
@@ -39,9 +20,45 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   name: 'Sidebar',
+  data() {
+    return {
+      navList: [
+        {
+          title: 'Меню',
+          items: [
+            { itemTitle: 'Головна', tab: "home", routePath: '/home' },
+            { itemTitle: 'Плейлисти', tab: "playlists", routePath: '/playlists' },
+            { itemTitle: 'Альбоми', tab: "albums", routePath: '/albums' },
+          ],
+        },
+        {
+          title: 'Бібліотека',
+          items: [
+            { itemTitle: 'Нещодавні', tab: "recent", routePath: '/recent' },
+            { itemTitle: 'Вибрані', tab: "favourites", routePath: '/favourites' },
+            { itemTitle: 'Локальні', tab: "local", routePath: '/local' },
+          ],
+        }
+      ],
+    }
+  },
+  computed: {
+    ...mapState({
+      currentTab: state => state.currentTab,
+    }),
+    ...mapMutations['setTabMutation'],
+  },
+  methods: {
+    changeTab(tab) {
+      if (this.currentTab != tab) {
+        this.setTabMutation(tab)
+      }
+    },
+  },
 }
 
 </script>
