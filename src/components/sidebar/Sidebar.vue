@@ -9,9 +9,9 @@
           <p class="navigation__title">{{ list.title }}</p>
           <li v-for="(item, index) in list.items" :key="index" class="navigation__item"
             :class="currentTab == item.tab ? 'active' : ''">
-            <router-link :to="item.routePath">
+            <a @click="changeTab(item.tab, item.routePath)">
               {{ item.itemTitle }}
-            </router-link>
+            </a>
           </li>
         </ul>
       </div>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Sidebar',
@@ -50,12 +50,12 @@ export default {
     ...mapState({
       currentTab: state => state.currentTab,
     }),
-    ...mapMutations['setTabMutation'],
   },
   methods: {
-    changeTab(tab) {
+    changeTab(tab, routePath) {
       if (this.currentTab != tab) {
-        this.setTabMutation(tab)
+        this.$router.push({path: tab})
+        this.$store.commit("setTabMutation", routePath);
       }
     },
   },
@@ -114,6 +114,11 @@ export default {
         font-size: 15px;
         line-height: 20px;
         color: var(--base-text);
+
+        &:hover {
+          color: var(--base-text-hover);
+          cursor: pointer;
+        }
       }
 
       &.active {

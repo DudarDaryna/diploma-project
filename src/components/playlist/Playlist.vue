@@ -19,13 +19,17 @@ export default {
   },
   computed: mapState({
     songs: state => state.songs,
-  })
+  }),
+  methods: {
+    selectMusic(music) {
+      this.setActiveMusic(music);
+    },
+  },
 }
 
 </script>
 
 <style lang="scss">
-
 .playlist {
   &__list {
     display: flex;
@@ -33,5 +37,4 @@ export default {
     gap: 20px;
   }
 }
-
 </style>
